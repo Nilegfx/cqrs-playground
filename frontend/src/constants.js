@@ -3,6 +3,6 @@ export const EVENT_TYPES = {
   PICKING: 'picking',
   PICKED: 'picked',
   SORTING: 'sorting',
-  SORT: 'sort'
+  SORTED: 'sorted'
 }
   

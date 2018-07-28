@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router } from "@reach/router"
 import './App.css';
 import { Layout } from 'antd';
 import {Navigation} from './Navigation';
@@ -23,7 +24,12 @@ class App extends Component {
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div className='content'>
-            <EventManager />
+            
+            <Router>
+              <EventManager path='/event-manager'/>
+            </Router>
+            
+            
         </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}/>

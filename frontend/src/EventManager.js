@@ -2,10 +2,17 @@ import React, { Component } from 'react'
 import { Event } from './Event';
 import { Button, Row, Col, notification } from 'antd';
 import { EVENT_TYPES } from './constants';
-const deleteAtIndex = (arr, index) => arr.filter((_, i) => i !== index);
+
+const removeById = (arr, tempIdToRemove) => arr.filter(({tempId}, i) => {
+  console.log('tempId', tempId);
+  console.log('tempIdToRemove', tempIdToRemove);
+
+  return tempId !== tempIdToRemove
+});
+const getRandomId = () => Math.random().toString(36).substr(2, 5);
 
 const EVENT_PUBLISHED_SUCCESS_MESSAGE = 'SUCESS TITLE';
-const EVENT_PUBLISHED_SUCCESS_DESCRIPTION = 'This is the content of the notification.';
+const EVENT_PUBLISHED_SUCCESS_DESCRIPTION = 'Event(s) were successfully fired.';
 const EVENT_PUBLISHED_FAILURE_MESSAGE = 'FAILED TO PUBLISH EVENTS';
 const EVENT_PUBLISHED_FAILURE_DESCRIPTION = 'Please check the console for more details';
 
@@ -22,9 +29,7 @@ export class EventManager extends Component {
     super(props)
 
     this.state = {
-      events: [{
-        eventType : EVENT_TYPES.OPA
-      }]
+      events: []
     }
   }
 
@@ -57,18 +62,18 @@ export class EventManager extends Component {
     })
   }
 
-  _createEvent(_, i) {
+  _renderEvent({tempId}) {
     let actions = {
       removeEvent: this._handleRemoveEvent
     };
 
     return (
-      <Event key={i} eventIndex={i} actions={actions} />
+      <Event key={tempId} tempId={tempId} actions={actions} />
     )
   }
 
-  _handleRemoveEvent = (index) => {
-    this.setState(({ events }) => ({ events: deleteAtIndex(events, index) }));
+  _handleRemoveEvent = (tempId) => {
+    this.setState(({ events }) => ({ events: removeById(events, tempId) }));
   }
 
   _renderGlobalActions() {
@@ -86,8 +91,12 @@ export class EventManager extends Component {
   }
 
   _handleAddEvent = () => {
+    console.log(this)
     this.setState(({ events }) => {
-      return { events: [...events, {}] }
+      return { events: [...events, {
+        tempId: getRandomId(),
+        eventType: EVENT_TYPES.OPA
+      }] }
     })
   }
 
@@ -106,7 +115,7 @@ export class EventManager extends Component {
       <div className='event-manager'>
         {this._renderGlobalActions()}
         <div className='events'>
-          {this.state.events.map((event, i) => this._createEvent(event, i))}
+          {this.state.events.map((event) => this._renderEvent(event))}
           {this._renderAddEvent()}
         </div>
       </div>

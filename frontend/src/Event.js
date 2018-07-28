@@ -6,7 +6,7 @@ const Option = Select.Option;
 const inputStyles = {width: '100%'};
 
 export class Event extends Component {
-
+  
   _handleOnChange = (value, dateString) => {
     console.log('Selected Time: ', value);
     console.log('Formatted Selected Time: ', dateString);
@@ -21,7 +21,7 @@ export class Event extends Component {
   }
 
   _handleRemove = () => {
-    this.props.actions.removeEvent(this.props.eventIndex);
+    this.props.actions.removeEvent(this.props.tempId);
   }
 
   _renderEventTypes() {
