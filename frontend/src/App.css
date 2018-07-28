@@ -1,0 +1,42 @@
+#components-layout-demo-fixed-sider .logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+
+.content {
+  background-color: #fff;
+}
+
+.event {
+  margin: 10px 0;
+  border: 1px dotted #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.events {
+  padding: 10px 20px;
+}
+
+.global-actions{
+  background-color:#0f8ee9;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.event-manager {
+
+}
